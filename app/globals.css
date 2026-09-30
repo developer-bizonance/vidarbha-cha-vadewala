@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #0b0a09;
+  --color-charcoal: #17140f;
+  --color-steel: #221e18;
+  --color-vada-red: #c41e2a;
+  --color-chili: #e8432f;
+  --color-turmeric: #e8a33d;
+  --color-papad: #f3ead9;
+  --color-papad-dim: #cfc4ac;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-charcoal: var(--color-charcoal);
+  --color-steel: var(--color-steel);
+  --color-vada-red: var(--color-vada-red);
+  --color-chili: var(--color-chili);
+  --color-turmeric: var(--color-turmeric);
+  --color-papad: var(--color-papad);
+  --color-papad-dim: var(--color-papad-dim);
+  --font-display: "Arial Black", "Haettenschweiler", "Franklin Gothic Bold", "Impact", sans-serif;
+  --font-body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+/*
+  This build uses system font stacks so it works with zero network calls.
+  For the exact brand look, install next/font/google (Anton + Manrope) once
+  you have normal internet access:
+
+    import { Anton, Manrope } from "next/font/google";
+    const anton = Anton({ variable: "--font-anton", weight: "400", subsets: ["latin"] });
+    const manrope = Manrope({ variable: "--font-manrope", weight: ["400","500","600","700","800"], subsets: ["latin"] });
+
+  Then swap the two --font-display / --font-body lines above for:
+    --font-display: var(--font-anton);
+    --font-body: var(--font-manrope);
+  and add `${anton.variable} ${manrope.variable}` to the <body> className in app/layout.js.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-papad);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(196, 30, 42, 0.12), transparent 40%),
+    radial-gradient(circle at 100% 20%, rgba(232, 163, 61, 0.08), transparent 35%);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.font-marathi {
+  font-family: "Noto Sans Devanagari", "Mangal", "Nirmala UI", "Shonar Bangla", sans-serif;
+}
+
+.text-outline-papad {
+  -webkit-text-stroke: 1.5px var(--color-papad);
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--color-vada-red);
+  color: var(--color-papad);
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow {
+    animation: none;
+  }
+}
